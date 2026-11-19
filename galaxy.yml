@@ -1,0 +1,26 @@
+---
+namespace: oceanbase
+name: ocp
+version: 0.1.0
+readme: README.md
+authors:
+  - OceanBase OCP Collection contributors
+description: Manage OceanBase Cloud Platform through its RESTful Open API
+license:
+  - GPL-3.0-or-later
+license_file: LICENSE
+tags:
+  - oceanbase
+  - database
+  - ocp
+  - infrastructure
+dependencies: {}
+build_ignore:
+  - .git
+  - .venv
+  - .pytest_cache
+  - .test
+  - __pycache__
+  - '*.pyc'
+  - tests/output
+  - docs/superpowers

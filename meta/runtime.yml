@@ -1,0 +1,19 @@
+---
+requires_ansible: '>=2.15'
+action_groups:
+  ocp:
+    - metadata:
+        extend_group:
+          - ocp_connection
+    - ocp_api
+    - ocp_info
+    - ocp_cluster_info
+    - ocp_cluster
+    - ocp_cluster_action
+    - ocp_tenant_info
+    - ocp_tenant
+    - ocp_host_info
+    - ocp_obproxy_info
+    - ocp_task_info
+    - ocp_inspection_info
+    - ocp_alarm
