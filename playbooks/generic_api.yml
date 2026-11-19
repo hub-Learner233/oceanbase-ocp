@@ -1,0 +1,20 @@
+---
+- name: Call any OCP Open API endpoint
+  hosts: localhost
+  gather_facts: false
+  vars:
+    api_method: GET
+    api_path: /api/v2/ob/clusters
+    api_query: {}
+    api_body: null
+  tasks:
+    - oceanbase.ocp.ocp_api:
+        base_url: "{{ lookup('env', 'OCP_URL') }}"
+        access_key: "{{ lookup('env', 'OCP_ACCESS_KEY') }}"
+        secret_key: "{{ lookup('env', 'OCP_SECRET_KEY') }}"
+        method: "{{ api_method }}"
+        path: "{{ api_path }}"
+        query: "{{ api_query }}"
+        body: "{{ api_body }}"
+        wait: "{{ api_wait | default(false) }}"
+      register: api_result

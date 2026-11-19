@@ -1,0 +1,22 @@
+---
+- name: Ensure an OceanBase tenant exists
+  hosts: localhost
+  gather_facts: false
+  vars:
+    ocp_connection: &ocp_connection
+      base_url: "{{ lookup('env', 'OCP_URL') }}"
+      access_key: "{{ lookup('env', 'OCP_ACCESS_KEY') }}"
+      secret_key: "{{ lookup('env', 'OCP_SECRET_KEY') }}"
+    cluster_name: staging
+    tenant_name: app
+    tenant_definition: {}
+  tasks:
+    - name: Create the tenant using the target OCP version's native schema
+      oceanbase.ocp.ocp_tenant:
+        <<: *ocp_connection
+        cluster_name: "{{ cluster_name }}"
+        name: "{{ tenant_name }}"
+        definition: "{{ tenant_definition }}"
+        wait: true
+        wait_timeout: 1200
+      no_log: true

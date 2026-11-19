@@ -1,0 +1,24 @@
+---
+- name: Read OCP application information
+  oceanbase.ocp.ocp_info:
+    base_url: "{{ ocp_url }}"
+    access_key: "{{ ocp_access_key }}"
+    secret_key: "{{ ocp_secret_key }}"
+  register: ocp_info
+
+- ansible.builtin.assert:
+    that:
+      - ocp_info.info is not none
+
+- name: Read an existing test cluster without changing it
+  oceanbase.ocp.ocp_cluster_info:
+    base_url: "{{ ocp_url }}"
+    access_key: "{{ ocp_access_key }}"
+    secret_key: "{{ ocp_secret_key }}"
+    name: "{{ ocp_test_cluster }}"
+    include_servers: true
+  register: cluster_info
+
+- ansible.builtin.assert:
+    that:
+      - cluster_info.cluster.name == ocp_test_cluster

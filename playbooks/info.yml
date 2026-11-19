@@ -1,0 +1,24 @@
+---
+- name: Inspect OCP and OceanBase resources
+  hosts: localhost
+  gather_facts: false
+  vars:
+    ocp_connection: &ocp_connection
+      base_url: "{{ lookup('env', 'OCP_URL') }}"
+      access_key: "{{ lookup('env', 'OCP_ACCESS_KEY') }}"
+      secret_key: "{{ lookup('env', 'OCP_SECRET_KEY') }}"
+  tasks:
+    - name: Read OCP application information
+      oceanbase.ocp.ocp_info:
+        <<: *ocp_connection
+      register: ocp_info
+
+    - name: List OceanBase clusters
+      oceanbase.ocp.ocp_cluster_info:
+        <<: *ocp_connection
+      register: clusters
+
+    - name: List managed hosts
+      oceanbase.ocp.ocp_host_info:
+        <<: *ocp_connection
+      register: hosts

@@ -1,0 +1,5 @@
+---
+ocp_url: https://ocp-test.example.com:8080
+ocp_access_key: "{{ vault_ocp_access_key }}"
+ocp_secret_key: "{{ vault_ocp_secret_key }}"
+ocp_test_cluster: existing_test_cluster
